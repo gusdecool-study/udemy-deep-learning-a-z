@@ -46,11 +46,21 @@ X = ct.fit_transform(X)
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0)
 
-# Feature scalling
+# Feature scaling
 from sklearn.preprocessing import StandardScaler
 sc_X = StandardScaler(with_mean=False)
 X_train = sc_X.fit_transform(X_train)
 X_test = sc_X.transform(X_test)
+
+# -------------------------------------------------------------------
+# Part 2 - Now let's make the ANN
+# -------------------------------------------------------------------
+
+# Importing Keras Libraries and Packages
+
+# -------------------------------------------------------------------
+# Clean code below
+# -------------------------------------------------------------------
 
 # Fitting logistic refresstion to the training set
 from sklearn.linear_model import LogisticRegression
