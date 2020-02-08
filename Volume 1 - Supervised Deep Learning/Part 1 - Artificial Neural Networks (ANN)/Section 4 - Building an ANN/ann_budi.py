@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Importing the dataset
+from docutils.nodes import classifier
+
 dataset = pd.read_csv('Churn_Modelling.csv')
 X = dataset.iloc[:, 3:13].values
 y = dataset.iloc[:, 13].values
@@ -56,6 +58,18 @@ from keras.layers import Dense
 
 # Initializing the ANN
 classifier = Sequential()
+
+# Adding the input layer and the first hidden layer
+classifier.add(Dense(6, kernel_initializer='uniform', activation='relu'))
+
+# Adding second layer
+classifier.add(Dense(6, kernel_initializer='uniform', activation='relu'))
+
+# Adding the output layer
+classifier.add(Dense(1, kernel_initializer='uniform', activation='sigmoid'))
+
+# Compiling the ANN
+classifier.compile('adam', loss='binary_crossentropy', metrics=['accuracy'])
 
 # -------------------------------------------------------------------
 # Clean code below
