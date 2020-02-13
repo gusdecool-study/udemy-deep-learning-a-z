@@ -1,20 +1,27 @@
 # Artificial Neural Network
 
-# -------------------------------------------------------------------
-# Part 1 - Data Precessing
-# -------------------------------------------------------------------
-
 # Importing the libraries
+import os
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 
-import keras
+# import keras
 from keras.models import Sequential
 from keras.layers import Dense
 
-dataset = pd.read_csv('Churn_Modelling.csv')
+# -------------------------------------------------------------------
+# Part 1 - Data Precessing
+# -------------------------------------------------------------------
+
+file_location = os.getcwd()
+file_location += '/Volume 1 - Supervised Deep Learning'
+file_location += '/Part 1 - Artificial Neural Networks (ANN)'
+file_location += '/Section 4 - Building an ANN'
+file_location += '/Churn_Modelling.csv'
+dataset = pd.read_csv(file_location)
+
 X = dataset.iloc[:, 3:13].values
 y = dataset.iloc[:, 13].values
 
