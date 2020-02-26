@@ -16,10 +16,7 @@ from keras.layers import Dense
 # -------------------------------------------------------------------
 
 file_location = os.getcwd()
-file_location += '/Volume 1 - Supervised Deep Learning'
-file_location += '/Part 1 - Artificial Neural Networks (ANN)'
-file_location += '/Section 4 - Building an ANN'
-file_location += '/Churn_Modelling.csv'
+file_location += '/section-04-building-ann/churn-modelling.csv'
 dataset = pd.read_csv(file_location)
 
 X = dataset.iloc[:, 3:13].values
