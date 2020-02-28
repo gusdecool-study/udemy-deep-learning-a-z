@@ -70,6 +70,6 @@ def scaling(train_data, test_data):
 
     scale = StandardScaler(with_mean=False)
     train_data = scale.fit_transform(train_data)
-    test_data = scale.fit(test_data)
+    test_data = scale.transform(test_data)
 
     return train_data, test_data

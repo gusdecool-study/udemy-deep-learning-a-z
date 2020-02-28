@@ -49,3 +49,5 @@ class Ann:
         :return: return list of prediction result
         :rtype: numpy.ndarray
         """
+
+        return self.__classifier.predict(x)
