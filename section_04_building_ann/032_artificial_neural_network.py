@@ -16,7 +16,7 @@ from keras.layers import Dense
 # -------------------------------------------------------------------
 
 file_location = os.getcwd()
-file_location += '/section-04-building-ann/churn-modelling.csv'
+file_location += '/section_04_building_ann/churn_modelling.csv'
 dataset = pd.read_csv(file_location)
 
 X = dataset.iloc[:, 3:13].values
@@ -27,12 +27,12 @@ y = dataset.iloc[:, 13].values
 # -------------------------------------------------------------------
 
 # Encode country
-labelencoder_X_1 = LabelEncoder()
-X[:, 1] = labelencoder_X_1.fit_transform(X[:, 1])
+label_encoder_X_1 = LabelEncoder()
+X[:, 1] = label_encoder_X_1.fit_transform(X[:, 1])
 
 # Encode gender
-labelencoder_X_2 = LabelEncoder()
-X[:, 2] = labelencoder_X_2.fit_transform(X[:, 2])
+label_encoder_X_2 = LabelEncoder()
+X[:, 2] = label_encoder_X_2.fit_transform(X[:, 2])
 
 # Causing error in Keras classifier fit
 # ct = ColumnTransformer(
