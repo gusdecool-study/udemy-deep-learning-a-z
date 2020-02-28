@@ -5,71 +5,86 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 
-def load_dataset():
+class DataProcessing:
     """
-    Load dataset from CSV
-
-    :return: Array of: independent variables, dependant variables
-    :rtype: (numpy.ndarray, numpy.ndarray)
-    """
-    file_location = str(pathlib.Path(__file__).parent.absolute()) + '/churn_modelling.csv'
-    dataset = pd.read_csv(file_location)
-
-    independent_variables = dataset.iloc[:, 3:13].values
-    dependant_variables = dataset.iloc[:, 13].values
-
-    return independent_variables, dependant_variables
-
-
-def encode(data, index):
-    """
-    Encode categorical data into numbers
-
-    :param data: data to be encoded
-    :type data: numpy.ndarray
-    :param index: the index that will be encoded
-    :type index: int
-
-    :return: encoded data
-    :rtype: numpy.ndarray
+    Data processing utility
     """
 
-    encoder = LabelEncoder()
-    data[:, index] = encoder.fit_transform(data[:, index])
+    __dataset: None
 
-    return data
+    def __init__(self):
+        self.__scale = StandardScaler(with_mean=False)
 
+    def load_dataset(self):
+        """
+        Load dataset from CSV
 
-def split(x, y):
-    """
-    Split the data that we want to train and test
+        :return: Array of: independent variables, dependant variables
+        :rtype: (numpy.ndarray, numpy.ndarray)
+        """
+        file_location = str(pathlib.Path(__file__).parent.absolute()) + '/churn_modelling.csv'
+        self.__dataset = pd.read_csv(file_location)
 
-    :param x: x data
-    :type x: numpy.ndarray
-    :param y: y data
-    :type y: numpy.ndarray
+        independent_variables = self.__dataset.iloc[:, 3:13].values
+        dependant_variables = self.__dataset.iloc[:, 13].values
 
-    :return: (x_train, x_test, y_train, y_test)
-    :rtype: (numpy.ndarray, numpy.ndarray, numpy.ndarray, numpy.ndarray)
-    """
+        return independent_variables, dependant_variables
 
-    return train_test_split(x, y, test_size=0.25, random_state=0)
+    @staticmethod
+    def encode(data, index):
+        """
+        Encode categorical data into numbers
 
+        :param data: data to be encoded
+        :type data: numpy.ndarray
+        :param index: the index that will be encoded
+        :type index: int
 
-def scaling(train_data, test_data):
-    """
-    Scaling the train and test data
+        :return: encoded data
+        :rtype: numpy.ndarray
+        """
 
-    :param train_data: train data
-    :type train_data: numpy.ndarray
-    :param test_data: test data
-    :type test_data: numpy.ndarray
-    :return: list of scaled train and test data
-    :rtype: (numpy.ndarray, numpy.ndarray)
-    """
+        encoder = LabelEncoder()
+        data[:, index] = encoder.fit_transform(data[:, index])
 
-    scale = StandardScaler(with_mean=False)
-    train_data = scale.fit_transform(train_data)
-    test_data = scale.transform(test_data)
+        return data
 
-    return train_data, test_data
+    @staticmethod
+    def split(x, y):
+        """
+        Split the data that we want to train and test
+
+        :param x: x data
+        :type x: numpy.ndarray
+        :param y: y data
+        :type y: numpy.ndarray
+
+        :return: (x_train, x_test, y_train, y_test)
+        :rtype: (numpy.ndarray, numpy.ndarray, numpy.ndarray, numpy.ndarray)
+        """
+
+        return train_test_split(x, y, test_size=0.25, random_state=0)
+
+    def fit(self, data):
+        """
+        Add sample data to fit
+
+        :param data: data
+        :type data: numpy.ndarray
+        """
+
+        self.__scale.fit(data)
+
+    def scale(self, data):
+        """
+        Scaling the data. WARNING: you must run fit() before.
+
+        :param data: train data
+        :type data: numpy.ndarray
+        :return: scaled data
+        :rtype: numpy.ndarray
+        """
+
+        scaled_data = self.__scale.transform(data)
+
+        return scaled_data
