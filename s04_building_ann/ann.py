@@ -51,3 +51,13 @@ class Ann:
         """
 
         return self.__classifier.predict(x)
+
+    def get_classifier(self):
+        """
+        get classifier instance
+
+        :return: classifier instance
+        :rtype: Sequential
+        """
+
+        return self.__classifier

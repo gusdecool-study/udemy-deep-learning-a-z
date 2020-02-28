@@ -1,23 +1,6 @@
 from sklearn.metrics import confusion_matrix
-from s04_building_ann.cx01_data_processing import DataProcessing
-from s04_building_ann.cx02_ann import Ann
-
-# -------------------------------------------------------------------------------------------------
-# data pre-processing
-# -------------------------------------------------------------------------------------------------
-
-data_processing = DataProcessing()
-x, y = data_processing.load_dataset()
-
-x = DataProcessing.encode(x, 1)  # encode country
-x = DataProcessing.encode(x, 2)  # encode gender
-
-x_train, x_test, y_train, y_test = DataProcessing.split(x, y)  # split data for test and train
-
-# scaling the data
-data_processing.fit(x_train)
-x_train = data_processing.scale(x_train)
-x_test = data_processing.scale(x_test)
+from s04_building_ann.ann import Ann
+from s04_building_ann.main_data_pre_processing import x_train, x_test, y_train, y_test
 
 # -------------------------------------------------------------------------------------------------
 # Artificial Neural Networks (ANN)
