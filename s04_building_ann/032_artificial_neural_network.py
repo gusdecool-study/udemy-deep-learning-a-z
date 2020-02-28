@@ -16,7 +16,7 @@ from keras.layers import Dense
 # -------------------------------------------------------------------
 
 file_location = os.getcwd()
-file_location += '/section_04_building_ann/churn_modelling.csv'
+file_location += '/s04_building_ann/churn_modelling.csv'
 dataset = pd.read_csv(file_location)
 
 X = dataset.iloc[:, 3:13].values
