@@ -1,3 +1,5 @@
+import time
+
 from keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.model_selection import GridSearchCV
 
@@ -16,7 +18,7 @@ def execute():
     classifier = KerasClassifier(build_classifier)
     parameters = {'batch_size': [25, 32], 'nb_epoch': [100, 500], 'optimizer': ['adam', 'rmsprop']}
 
-    grid_search = GridSearchCV(classifier, parameters, 'accuracy', cv=10)
+    grid_search = GridSearchCV(classifier, parameters, 'accuracy', cv=10, n_jobs=-1)
     grid_search = grid_search.fit(x_train, y_train)
 
     best_parameters = grid_search.best_params_
@@ -25,4 +27,10 @@ def execute():
     return best_parameters, best_accuracy
 
 
-execute()
+start_time = time.time()
+
+result_parameters, result_accuracy = execute()
+print(result_parameters, result_accuracy)
+
+seconds_elapsed = time.time() - start_time
+print('The process took %.2f minutes' % (seconds_elapsed / 60))
