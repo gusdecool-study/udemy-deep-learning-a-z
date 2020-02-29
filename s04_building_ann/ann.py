@@ -31,12 +31,12 @@ class Ann:
 
         self.__classifier.add(Dropout(fraction))
 
-    def compile(self):
+    def compile(self, optimizer: str = 'adam'):
         """
         Configures the model for training.
         """
 
-        self.__classifier.compile('adam', loss='binary_crossentropy', metrics=['accuracy'])
+        self.__classifier.compile(optimizer, loss='binary_crossentropy', metrics=['accuracy'])
 
     def train(self, x, y):
         """

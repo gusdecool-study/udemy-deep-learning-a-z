@@ -73,7 +73,7 @@ class DataProcessing:
         :type data: numpy.ndarray
         """
 
-        self.__scale.fit(data)
+        self.__scale.fit(data)  # TODO check if we should use the fit() returned value.
 
     def scale(self, data):
         """
