@@ -16,7 +16,9 @@ def build_classifier():
 
     ann = Ann()
     ann.add_layer(6)
+    ann.add_drop(0.1)
     ann.add_layer(6)
+    ann.add_drop(0.1)
     ann.add_layer(1, 'sigmoid')
     ann.compile()
 

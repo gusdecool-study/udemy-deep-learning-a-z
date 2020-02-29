@@ -1,5 +1,5 @@
 from keras import Sequential
-from keras.layers import Dense
+from keras.layers import Dense, Dropout
 
 
 class Ann:
@@ -20,6 +20,16 @@ class Ann:
         """
 
         self.__classifier.add(Dense(node, kernel_initializer='uniform', activation=activation))
+
+    def add_drop(self, fraction):
+        """
+        add dropout in hidden layer
+
+        :param fraction: fraction number between 0 and 1.
+        :type fraction: float
+        """
+
+        self.__classifier.add(Dropout(fraction))
 
     def compile(self):
         """
